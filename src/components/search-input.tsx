@@ -6,10 +6,10 @@ const SearchInput: React.FC<{
   onChange: (value: string) => void;
 }> = ({value, onChange}) => {
   const [input, setInput] = useState(value);
-  const searchSubject = useRef(new Subject<string>());
+  const searchSubject = new Subject<string>();
 
   useEffect(() => {
-    const subscription = searchSubject.current
+    const subscription = searchSubject
       .pipe(debounceTime(1000))
       .subscribe((searchValue) => {
         onChange(searchValue);
@@ -24,7 +24,7 @@ const SearchInput: React.FC<{
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-    searchSubject.current.next(e.target.value);
+    searchSubject.next(e.target.value);
   };
 
   return (
