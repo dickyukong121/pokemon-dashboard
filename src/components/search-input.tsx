@@ -1,19 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { debounceTime, Subject } from "rxjs";
 
-type Props = {
+const SearchInput: React.FC<{
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
-  className?: string;
-};
-
-const SearchInput: React.FC<Props> = ({
-  value,
-  onChange,
-  placeholder = "Search Pokemon...",
-  className = "p-2 mb-4 border rounded",
-}) => {
+}> = ({value, onChange}) => {
   const [input, setInput] = useState(value);
   const searchSubject = useRef(new Subject<string>());
 
@@ -38,8 +29,8 @@ const SearchInput: React.FC<Props> = ({
 
   return (
     <input
-      className={className}
-      placeholder={placeholder}
+      className="p-2 mb-4 border rounded"
+      placeholder="Search Pokemon..."
       value={input}
       onChange={handleChange}
     />
