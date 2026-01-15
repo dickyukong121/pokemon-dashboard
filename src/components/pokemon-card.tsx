@@ -1,11 +1,13 @@
 import type { PokemonDetail } from "@/types/pokemon";
 import type React from "react";
+import { useSelector } from "react-redux";
 
 const PokemonCard: React.FC<{ pokemon: PokemonDetail, onSelect:(p: PokemonDetail)=>void }> = ({ pokemon, onSelect }) => {
+  const {darkMode} = useSelector((state: any) => state.mode);
   return (
     <div
       key={pokemon.id}
-      className="flex flex-col lg:flex-row w-100 lg:w-200 justify-between p-4 border rounded hover:bg-blue-100 cursor-pointer"
+      className={`flex flex-col lg:flex-row w-100 lg:w-200 justify-between p-4 border rounded hover:bg-blue-100 cursor-pointer ${darkMode ? "bg-black text-white" : "bg-white text-gray-800"}`}
       onClick={() => onSelect(pokemon)}
     >
       <img src={pokemon.sprites.front_default} alt={pokemon.name} />
